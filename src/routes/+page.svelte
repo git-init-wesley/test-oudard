@@ -2,7 +2,7 @@
   import { Accordion, AccordionItem, Button, Search, Spinner } from "flowbite-svelte";
   import type { Company } from "../lib/Company";
   import moment from "moment/moment";
-  import { isMoralPerson } from "$lib/Company.js";
+  import { isAssociation, isMoralPerson } from "$lib/Company.js";
   import { base } from "$app/paths";
   import { Utils } from "$lib/Utils.js";
 
@@ -12,16 +12,12 @@
   let isQuery = false;
 
   const onChange = () => {
-    console.log(isQuery);
     if (searchValue.length >= 3) {
       if (isQuery) return;
       isQuery = true;
       queryResult = undefined;
       fetch(encodeURI(`https://recherche-entreprises.api.gouv.fr/search?q=${searchValue}`))
-        .then(async (value) => {
-          queryResult = (await value.json()).results;
-          console.log(queryResult);
-        })
+        .then(async (value) => queryResult = (await value.json()).results)
         .finally(() => isQuery = false);
     }
   };
@@ -70,9 +66,11 @@
                 SIREN: {company.siren ?? unknown}
               </p>
 
+              <p class="mb-2">Association: {isAssociation(company) ? 'Yes' : 'No'}</p>
+
               <p class="mb-2">Seat address: {company.siege.adresse}</p>
 
-              {#if company.dirigeants}
+              {#if company.dirigeants && company.dirigeants.length > 0}
                 <p class="mb-2">
                   Leader{company.dirigeants.length > 1 ? 's' : ''}:
                   {#each company.dirigeants as leader}
