@@ -47,7 +47,7 @@ jobs:
       - name: Build dependencies
         run: npm run build
       - name: Nojekyll
-        run: touch build/.nojekyll
+        run: touch ${{ github.workspace }}/build/.nojekyll
       - name: Deploy with gh-pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
