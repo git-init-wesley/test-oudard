@@ -25,7 +25,7 @@
   <DarkMode />
 </div>
 
-<Footer class="absolute bottom-0 left-0 z-20 w-full h-[175px] border-t border-gray-100 dark:border-gray-900"
+<Footer class="absolute bottom-0 left-0 z-20 w-full h-[175px] border-t border-gray-100 dark:border-gray-700"
         footerType="logo">
   <div class="sm:flex sm:items-center sm:justify-between">
     <FooterBrand

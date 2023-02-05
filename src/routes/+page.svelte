@@ -4,6 +4,7 @@
   import moment from "moment/moment";
   import { isMoralPerson } from "$lib/Company.js";
   import { base } from "$app/paths";
+  import { Utils } from "$lib/Utils.js";
 
   const unknown = "UNKNOWN";
   let searchValue = "";
@@ -26,9 +27,9 @@
   };
 </script>
 
-<div class="container mx-auto my-4 ">
+<div class="container mx-auto px-2 py-4 my-4 ">
 
-  <div class="flex row-auto justify-start items-center">
+  <div class="flex flex-row justify-start items-center">
     <img alt="Favicon" class="w-[52px] h-[52px]" src="{base}/favicon.png" />
     <div class="p-1">
       <h1 class="text-4xl">Welcome back, Nicolas OUDARD</h1>
@@ -76,9 +77,12 @@
                   Leader{company.dirigeants.length > 1 ? 's' : ''}:
                   {#each company.dirigeants as leader}
                     {#if isMoralPerson(leader)}
-                      <span class="mx-1">{leader.denomination ?? unknown} (SIREN: {leader.siren ?? unknown}),</span>
+                      <span class="mr-1">{leader.denomination ?? unknown} (SIREN: {leader.siren ?? unknown}),</span>
                     {:else}
-                      <span class="mx-1">{leader.prenoms ?? unknown} {leader.nom?.toUpperCase() ?? unknown},</span>
+                      <span class="mr-1">
+                        {leader.prenoms ? Utils.capitalize(leader.prenoms) : unknown} {leader.nom?.toUpperCase() ?? unknown}
+                        ,
+                      </span>
                     {/if}
                   {/each}
                 </p>
