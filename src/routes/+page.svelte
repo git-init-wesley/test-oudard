@@ -3,6 +3,7 @@
   import type { Company } from "../lib/Company";
   import moment from "moment/moment";
   import { isMoralPerson } from "$lib/Company.js";
+  import { base } from "$app/paths";
 
   const unknown = "UNKNOWN";
   let searchValue = "";
@@ -28,7 +29,7 @@
 <div class="container mx-auto my-4 ">
 
   <div class="flex row-auto justify-start items-center">
-    <img alt="Favicon" class="w-[52px] h-[52px]" src="/favicon.png" />
+    <img alt="Favicon" class="w-[52px] h-[52px]" src="{base}/favicon.png" />
     <div class="p-1">
       <h1 class="text-4xl">Welcome back, Nicolas OUDARD</h1>
       <h5 class="text-2xs text-gray-500 dark:text-gray-500 italic">This test was performed by Wesley LEVASSEUR.</h5>
